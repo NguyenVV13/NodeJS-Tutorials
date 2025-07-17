@@ -4,6 +4,7 @@
  */
 const http = require('http');
 const fs = require('fs');  // Filesystem for serving static files
+const path = require('path');  // module for filesystem pathing
 
 
 
@@ -18,26 +19,27 @@ console.log(ex);
 // res is what this server responds to the client with
 const server = http.createServer((req, res) => {
     /* Basic path logic */
-    // if(req.url === '/') {
-    //     // http://localhost:port/
-    //     res.write('Hello World from Node.js at root directory');  // Sets the response
-    //     res.end();  // Sends the response
-    // }
-    // else {
-    //     // http://localhost:port/anything-else
-    //     res.write('Message from some other domain');
-    //     res.end();
-    // }
-
+    if(req.url === '/') {
+        // http://localhost:port/
+        res.write('Hello World from Node.js at root directory');  // Sets the response
+        res.end();  // Sends the response
+    }
     /* Serving a static file */
-    // const readStream = fs.createReadStream('./example.txt');
-    // res.writeHead(200, {'content-type': 'text/plain'})  // Response header
-    // readStream.pipe(res);  // Pipe content from the filesystem readstream into the response
-
-    const readStream = fs.createReadStream('./orange.png');
-    res.writeHead(200, {'content-type': 'image/png'})  // Response header
-    readStream.pipe(res);  // Pipe content from the filesystem readstream into the response
-
+    else if(req.url === '/text') {
+        const readStream = fs.createReadStream(path.join(__dirname, 'example.txt'));
+        res.writeHead(200, {'content-type': 'text/plain'})  // Response header
+        readStream.pipe(res);  // Pipe content from the filesystem readstream into the response
+    }
+    else if (req.url === '/picture') {
+        const readStream = fs.createReadStream(path.join(__dirname, 'orange.txt'));
+        res.writeHead(200, {'content-type': 'image/png'})
+        readStream.pipe(res);
+    }
+    else {
+        // http://localhost:port/anything-else
+        res.write('Message from some other domain');
+        res.end();
+    }
 });
 
 // Gets the server up and running by telling the server to listen to port 3000
