@@ -1,0 +1,14 @@
+{
+  "name": "nodejs_tutorial",
+  "version": "1.0.0",
+  "description": "nodejs package example for setting up a nodejs server",
+  "main": "http-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vi Nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
