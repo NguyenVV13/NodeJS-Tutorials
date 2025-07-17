@@ -26,12 +26,12 @@ const server = http.createServer((req, res) => {
     }
     /* Serving a static file */
     else if(req.url === '/text') {
-        const readStream = fs.createReadStream(path.join(__dirname, 'example.txt'));
+        const readStream = fs.createReadStream(path.join(__dirname, 'files', 'example.txt'));
         res.writeHead(200, {'content-type': 'text/plain'})  // Response header
         readStream.pipe(res);  // Pipe content from the filesystem readstream into the response
     }
     else if (req.url === '/picture') {
-        const readStream = fs.createReadStream(path.join(__dirname, 'orange.txt'));
+        const readStream = fs.createReadStream(path.join(__dirname, 'files', 'orange.txt'));
         res.writeHead(200, {'content-type': 'image/png'})
         readStream.pipe(res);
     }
