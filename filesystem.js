@@ -9,14 +9,14 @@ const fs = require('fs');
 
 // Creating a file, ASYNCHRONOUS
 // File name, input data, callback
-// fs.writeFile('example.txt', "This is input data for the file", (err) => {
+// fs.writeFile('./files/example.txt', "This is input data for the file", (err) => {
 //     if(err)
 //         console.log(err);
 //     else {
 //         console.log("File successfully created");
 //         // Reading a file
 //         // File name, encoding, (callback, data)
-//         fs.readFile('example.txt', 'utf8', (err, file) => {
+//         fs.readFile('./files/example.txt', 'utf8', (err, file) => {
 //             if(err)
 //                 console.log(err);
 //             else {
@@ -28,7 +28,7 @@ const fs = require('fs');
 
 // Renaming a file, ASYNCHRONOUS
 // Old name, new name, callback
-// fs.rename('example.txt', 'example2.txt', (err) => {
+// fs.rename('./files/example.txt', './files/example2.txt', (err) => {
 //     if(err)
 //         console.log(err);
 //     else {
@@ -37,7 +37,7 @@ const fs = require('fs');
 // })
 
 // Straightforward append example
-// fs.appendFile('example2.txt', "\nData being appended", (err) => {
+// fs.appendFile('./files/example2.txt', "\nData being appended", (err) => {
 //     if(err)
 //         console.log(err);
 //     else
@@ -45,7 +45,7 @@ const fs = require('fs');
 // })
 
 // Deleting a file
-// fs.unlink('example2.txt', (err) => {
+// fs.unlink('./files/example2.txt', (err) => {
 //     if(err)
 //         console.log(err);
 //     else
@@ -57,7 +57,7 @@ const fs = require('fs');
 /* Working with directories */
 
 // Make directory
-// fs.mkdir('ex_dir', (err) => {
+// fs.mkdir('./ex_dir', (err) => {
 //     if(err)
 //         console.log(err);
 //     else
@@ -65,7 +65,7 @@ const fs = require('fs');
 // })
 
 // Remove directory, directory MUST be EMPTY before deleting
-// fs.rmdir('ex_dir', (err) => {
+// fs.rmdir('./ex_dir', (err) => {
 //     if(err)
 //         console.log(err);
 //     else
@@ -109,8 +109,8 @@ data into a small buffer, which allow read and write chunk by chunk, while readF
 requires the entire file to be saved into a FULL buffer. */
 
 // Without the optional enconding parameter, the data is stored as bytes
-// const readStream = fs.createReadStream('./example.txt', 'utf8');
-// const writeStream = fs.createWriteStream('./example2.txt');
+// const readStream = fs.createReadStream('./files/example.txt', 'utf8');
+// const writeStream = fs.createWriteStream('./files/example2.txt');
 
 // Listens for the 'data' event from reading data in from an input stream
 // readStream.on('data', (chunk) => {
@@ -121,8 +121,8 @@ requires the entire file to be saved into a FULL buffer. */
 //readStream.pipe(writeStream);
 
 // Transformation stream (compression)
-// const readStream = fs.createReadStream('./example.txt', 'utf8');
-// const writeStream = fs.createWriteStream('./example2.txt.gz');
+// const readStream = fs.createReadStream('./files/example.txt', 'utf8');
+// const writeStream = fs.createWriteStream('./files/example2.txt.gz');
 // const zlib = require('zlib');  // Data compression
 // const gzip = zlib.createGzip();
 
@@ -130,8 +130,8 @@ requires the entire file to be saved into a FULL buffer. */
 // readStream.pipe(gzip).pipe(writeStream);
 
 // Transformation stream (unzipping)
-const readStream = fs.createReadStream('./example2.txt.gz');
-const writeStream = fs.createWriteStream('./uncompressed.txt');
+const readStream = fs.createReadStream('./files/example2.txt.gz');
+const writeStream = fs.createWriteStream('./files/uncompressed.txt');
 const zlib = require('zlib');  // Data compression
 const gunzip = zlib.createGunzip();
 // Read in the compressed data, unzip it, then write the contents into a text file
