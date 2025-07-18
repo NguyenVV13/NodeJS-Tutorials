@@ -6,11 +6,21 @@
  * a server and serve static files, but is more powerful.
  */
 const express = require('express');
+const path = require('path');
 const app = express();
+
+/* Alias for the files directory so that people don't see the server file
+   structure when they inspect the page source code. */
+/* This line has middleware function, which in Express is when there is a
+   function inside the HTTP method, which has access to req, res, and next.
+   https://expressjs.com/en/guide/writing-middleware.html */
+app.use('/public', express.static(path.join(__dirname, 'files')));
 
 // get() takes a path and a handler, much like http
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    // res.send('Hello World');
+
+    res.sendFile(path.join(__dirname, 'files', 'index.html'));
 });
 
 // Adding another path
@@ -18,7 +28,7 @@ app.get('/example', (req, res) => {
     res.send('Hitting the Example path');
 });
 
-// Path Parameters
+/* Path Parameters */
 app.get('/example/:name/:age', (req, res) => {
     // In this case, we specified that the two inputs after the /example path are
     // parameters `name` and `age`, and both parameters MUST be present to work.
