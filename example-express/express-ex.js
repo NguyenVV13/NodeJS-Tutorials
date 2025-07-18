@@ -9,11 +9,14 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-/* Alias for the files directory so that people don't see the server file
-   structure when they inspect the page source code. */
-/* This line has middleware function, which in Express is when there is a
+/* Do use() with a string parameter to create an alias for the files directory
+   so that people don't see the server file structure when they inspect the page
+   source code. */
+/* This line has a middleware function, which in Express is when there is a
    function inside the HTTP method, which has access to req, res, and next.
    https://expressjs.com/en/guide/writing-middleware.html */
+/* Use Express.static to serve the static files from `.../files`
+   Due to the aliasing with use(), this public directory is called /public */
 app.use('/public', express.static(path.join(__dirname, 'files')));
 
 // get() takes a path and a handler, much like http
