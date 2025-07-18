@@ -1,4 +1,4 @@
-This is the directory that contains all the files related to hosting a server using node.
+This README pertains to server data for http-server.js and express-ex.js.
 
 
 
