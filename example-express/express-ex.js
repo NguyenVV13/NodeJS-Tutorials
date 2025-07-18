@@ -7,6 +7,7 @@
  */
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
 const app = express();
 
 /* Do use() with a string parameter to create an alias for the files directory
@@ -18,6 +19,15 @@ const app = express();
 /* Use Express.static to serve the static files from `.../files`
    Due to the aliasing with use(), this public directory is called /public */
 app.use('/public', express.static(path.join(__dirname, 'files')));
+
+/* Using Express with Body Parser modules to handle POST requests */
+// Allows the parsing of URL-encoded forms, attaching the parsed data into req
+app.use(bodyParser.urlencoded({extended: false}));
+app.post('/', (req, res) => {
+    console.log(req.body);
+    // database work here
+    res.send('successfully posted data');
+});
 
 // get() takes a path and a handler, much like http
 app.get('/', (req, res) => {
