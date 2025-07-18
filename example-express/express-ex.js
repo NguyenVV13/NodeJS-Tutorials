@@ -23,10 +23,12 @@ app.use('/public', express.static(path.join(__dirname, 'files')));
 /* Using Express with Body Parser modules to handle POST requests */
 // Allows the parsing of URL-encoded forms, attaching the parsed data into req
 app.use(bodyParser.urlencoded({extended: false}));
+// Allows the parsing of JSON forms
+app.use(bodyParser.json());
 app.post('/', (req, res) => {
     console.log(req.body);
     // database work here
-    res.send('successfully posted data');
+    res.json({success: true});  // Takes JS object and converts it into JSON
 });
 
 // get() takes a path and a handler, much like http

@@ -11,7 +11,7 @@
         <h1>Hello World!!!!!</h1>
         
         <!-- POST method with Express and Body Parser modules -->
-        <form action="/" method="POST">
+        <form action="/" method="POST" id="form">
             <div class="form-group">
                 <label for="email">Email address:</label>
                 <input type="email" class="form-control" name="email">
@@ -22,5 +22,30 @@
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
+
+        <!-- JQuery CDN, JS library for simplying HTML document traversal, event handling, animation, and Ajax -->
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(() => {
+                // Get the form and attach submit handler to it, which takes a
+                // callback function, which has an event as a parameter
+                $('#form').submit((e) => {
+                    // Prevent the default submit
+                    e.preventDefault();
+
+                    // Ajax to make the POST request, posting JSON data back to the server
+                    $.ajax({
+                        url: '/',
+                        type: 'post',
+                        contentType: 'application/json',
+                        data: JSON.stringify($('#form').serializeArray()),
+                        success: (response) => {
+                            console.log('successfully got response');
+                            console.log(response);
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
