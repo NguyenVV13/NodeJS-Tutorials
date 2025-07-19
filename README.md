@@ -1,4 +1,8 @@
-This README pertains to server data for http-server.js and express-ex.js.
+Tutorial from this YouTube link: https://www.youtube.com/watch?v=RLtyhwFtXQA
+
+
+
+This README pertains to specific information regarding server data for http-server.js and express-ex.js.
 
 
 

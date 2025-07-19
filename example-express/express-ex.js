@@ -8,6 +8,7 @@
 const express = require('express');  // Powerful module for backend web development
 const path = require('path');  // Used here for path joining
 const bodyParser = require('body-parser');  // Used for parsing form data
+const Joi = require('joi');  // Used to validate user input by using a schema
 const app = express();
 
 /* Do use() with a string parameter to create an alias for the files directory
@@ -28,8 +29,28 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.post('/', (req, res) => {
     console.log(req.body);
-    // database work here
-    res.json({success: true});  // Takes JS object and converts it into JSON
+    // Joi.object() generates a schema object
+    // keys() sets or extends the schema for key-value pairs
+    const schema = Joi.object().keys({
+        // email is a required field that must be a string that follows email format
+        email: Joi.string().trim().email().required(),
+        // password is a required field that must be a string that is
+        // a minimum of 5 characters and a maximum of 10 characters
+        password: Joi.string().min(5).max(10).required
+    });
+    console.log(schema.validate(req));
+    /* This is where the tutorial deprecates, since Joi doesn't work this way */
+    // Joi.validate(req, schema, (err, result) => {
+    //     if(err) {
+    //         console.log(err);
+    //         res.send('An error has occurred');
+    //     }
+    //     else {
+    //         console.log(result);
+    //         // database work here
+    //         res.json({success: true});  // Takes JS object and converts it into JSON
+    //     }
+    // })
 });
 
 // get() takes a path and a handler, much like http
