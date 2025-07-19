@@ -5,9 +5,9 @@
  * Works similarly to the http and fs modules to establish
  * a server and serve static files, but is more powerful.
  */
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
+const express = require('express');  // Powerful module for backend web development
+const path = require('path');  // Used here for path joining
+const bodyParser = require('body-parser');  // Used for parsing form data
 const app = express();
 
 /* Do use() with a string parameter to create an alias for the files directory
@@ -23,7 +23,8 @@ app.use('/public', express.static(path.join(__dirname, 'files')));
 /* Using Express with Body Parser modules to handle POST requests */
 // Allows the parsing of URL-encoded forms, attaching the parsed data into req
 app.use(bodyParser.urlencoded({extended: false}));
-// Allows the parsing of JSON forms
+// Allows the parsing of JSON forms and automatically converts JSONs
+// to arrays that JS can process
 app.use(bodyParser.json());
 app.post('/', (req, res) => {
     console.log(req.body);
