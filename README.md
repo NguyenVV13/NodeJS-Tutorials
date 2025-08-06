@@ -4,6 +4,8 @@ Tutorial from this YouTube link: https://www.youtube.com/watch?v=RLtyhwFtXQA
 
 This README pertains to specific information regarding server data for http-server.js and express-ex.js.
 
+**NOTE**: JOI validation doesn't work right now since the version used in the tutorial was deprecated.
+
 
 
 The `package.json` file is made by doing `npm init`.
